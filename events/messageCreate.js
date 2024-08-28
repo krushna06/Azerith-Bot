@@ -18,7 +18,7 @@ module.exports = {
                 .setTitle('New Suggestion')
                 .setDescription(message.content)
                 .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL() })
-                .setColor(0x00FF00)
+                .setColor(0x2F3136)
                 .setTimestamp();
 
             const suggestionMessage = await message.channel.send({ embeds: [embed] });
