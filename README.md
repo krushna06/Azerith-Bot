@@ -1,4 +1,4 @@
-# Modified JTC-Discord
+# Azerith Discord
 
 This repository contains a modified version of the original [JTC-Discord](https://github.com/krushna06/JTC-Discord) project by me.
 
