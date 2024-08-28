@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const fs = require('fs');
 const path = require('path');
 
-const dataPath = path.join(__dirname, '../data.json');
+const dataPath = path.join(__dirname, '../database/data.json');
 let data = require(dataPath);
 
 module.exports = {

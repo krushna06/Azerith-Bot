@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
-const suggestionsPath = './suggestions.json';
+const suggestionsPath = './database/suggestions.json';
 
 module.exports = {
     data: new SlashCommandBuilder()

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const dataPath = path.join(__dirname, '../data.json');
+const dataPath = path.join(__dirname, '../database/data.json');
 const channelData = require(dataPath);
 const saveData = () => fs.writeFileSync(dataPath, JSON.stringify(channelData, null, 2));
 

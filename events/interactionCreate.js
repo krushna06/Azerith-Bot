@@ -4,7 +4,7 @@ const { handleButtonInteraction } = require('./buttonCreate');
 const { handleModalSubmit } = require('./modalCreate');
 const { handleMenuButtonInteraction } = require('./menuCreate');
 
-const dataPath = path.join(__dirname, '../data.json');
+const dataPath = path.join(__dirname, '../database/data.json');
 let channelData = require(dataPath);
 
 module.exports = {
