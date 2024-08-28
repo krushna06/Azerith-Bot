@@ -1,0 +1,17 @@
+{
+    "name": "jtc",
+    "version": "1.0.0",
+    "description": "A Discord bot for Join-to-Create voice channels with interactive management.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "@discordjs/rest": "^2.3.0",
+        "chalk": "^5.3.0",
+        "cli-table3": "^0.6.5",
+        "cors": "^2.8.5",
+        "discord.js": "^14.15.3",
+        "express": "^4.19.2"
+    }
+}
