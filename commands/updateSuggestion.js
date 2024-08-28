@@ -12,8 +12,12 @@ module.exports = {
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('status')
-                .setDescription('The new status of the suggestion (approved, rejected)')
-                .setRequired(true)),
+                .setDescription('The new status of the suggestion')
+                .setRequired(true)
+                .addChoices(
+                    { name: 'Approved', value: 'approved' },
+                    { name: 'Rejected', value: 'rejected' }
+                )),
     async execute(interaction) {
         const suggestionId = interaction.options.getString('id');
         const newStatus = interaction.options.getString('status');
@@ -25,7 +29,7 @@ module.exports = {
 
         const suggestion = suggestionsData.suggestions.find(s => s.id === suggestionId);
         if (!suggestion) {
-            return interaction.reply('Suggestion not found.');
+            return interaction.reply({ content: 'Suggestion not found.', ephemeral: true });
         }
 
         suggestion.status = newStatus;
@@ -46,11 +50,11 @@ module.exports = {
 
             await suggestionMessage.edit({ embeds: [embed] });
         } catch (error) {
-            return interaction.reply('Failed to update the suggestion message.');
+            return interaction.reply({ content: 'Failed to update the suggestion message.', ephemeral: true });
         }
 
         fs.writeFileSync(suggestionsPath, JSON.stringify(suggestionsData, null, 2));
 
-        await interaction.reply(`Suggestion status updated to "${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)}".`);
+        await interaction.reply({ content: `Suggestion status updated to "${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)}".`, ephemeral: true });
     }
 };
