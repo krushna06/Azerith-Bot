@@ -1,12 +1,4 @@
 {
-  "suggestionChannel": "899659621097152563",
-  "suggestions": [
-    {
-      "id": "1278477049442599054",
-      "user": "853620650592567304",
-      "content": "yes",
-      "timestamp": "2024-08-28T22:11:22.296Z",
-      "status": "pending"
-    }
-  ]
+  "suggestionChannel": "",
+  "suggestions": []
 }
