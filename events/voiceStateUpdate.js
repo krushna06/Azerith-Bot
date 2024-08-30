@@ -1,3 +1,6 @@
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { panelBody, panelRowOne, panelRowTwo, panelRowThree } = require('../common/voice_panel');
+
 const fs = require('fs');
 const path = require('path');
 const config = require('../config.json');
@@ -12,7 +15,7 @@ module.exports = {
     async execute(oldState, newState) {
         const jtcChannelId = config.jtcChannelId;
 
-        if (newState.channelId === jtcChannelId && !oldState.channelId) {
+        if (newState.channelId === jtcChannelId) {
             const member = newState.member;
             const guild = member.guild;
 
@@ -24,12 +27,13 @@ module.exports = {
                     {
                         id: member.id,
                         allow: ['ViewChannel', 'Connect', 'ManageChannels', 'MuteMembers', 'DeafenMembers'],
-                    },
-                    {
-                        id: guild.roles.everyone,
-                        deny: ['Connect'],
-                    },
+                    }
                 ],
+            });
+    
+            await channel.send({
+                embeds: [panelBody()],
+                components: [panelRowOne(), panelRowTwo(), panelRowThree()]
             });
 
             await member.voice.setChannel(channel);
