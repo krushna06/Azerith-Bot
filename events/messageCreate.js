@@ -29,19 +29,19 @@ module.exports = {
             const upvoteButton = new ButtonBuilder()
               .setCustomId('upvote')
               .setLabel('0')
-              .setEmoji("1278739683148435518")
+              .setEmoji("1192654081953648761")
               .setStyle(ButtonStyle.Secondary);
       
             const downvoteButton = new ButtonBuilder()
               .setCustomId('downvote')
               .setLabel('0')
-              .setEmoji("1278739689884614757")
+              .setEmoji("1192654097048940554")
               .setStyle(ButtonStyle.Secondary);
 
             const whoVotedButton = new ButtonBuilder()
               .setCustomId('whoVoted')
               .setLabel('Who Voted?')
-              .setEmoji('1278742237840146473')
+              .setEmoji('1205513769900580884')
               .setStyle(ButtonStyle.Success);
 
             const row = new ActionRowBuilder().addComponents(upvoteButton, downvoteButton, whoVotedButton);
