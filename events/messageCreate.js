@@ -1,4 +1,4 @@
-const { Events, EmbedBuilder } = require('discord.js');
+const { Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const fs = require('fs');
 const suggestionsPath = './database/suggestions.json';
 
@@ -14,16 +14,39 @@ module.exports = {
         const suggestionChannelId = suggestionsData.suggestionChannel;
 
         if (message.channel.id === suggestionChannelId) {
+            await message.delete();
             const embed = new EmbedBuilder()
-                .setTitle('New Suggestion')
-                .setDescription(message.content)
-                .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL() })
-                .setColor(0x2F3136)
-                .setTimestamp();
+              .setDescription("> " + message.content)
+              .setAuthor({
+                name: message.author.username + "'s Suggestions",
+                iconURL: message.author.displayAvatarURL(),
+                url: 'https://azerithmc.com'
+              })
+              .setThumbnail(message.author.displayAvatarURL())
+              .setColor(0x2F3136)
+              .setTimestamp();
 
-            const suggestionMessage = await message.channel.send({ embeds: [embed] });
-            await suggestionMessage.react('👍');
-            await suggestionMessage.react('👎');
+            const upvoteButton = new ButtonBuilder()
+              .setCustomId('upvote')
+              .setLabel('0')
+              .setEmoji("1278739683148435518")
+              .setStyle(ButtonStyle.Secondary);
+      
+            const downvoteButton = new ButtonBuilder()
+              .setCustomId('downvote')
+              .setLabel('0')
+              .setEmoji("1278739689884614757")
+              .setStyle(ButtonStyle.Secondary);
+
+            const whoVotedButton = new ButtonBuilder()
+              .setCustomId('whoVoted')
+              .setLabel('Who Voted?')
+              .setEmoji('1278742237840146473')
+              .setStyle(ButtonStyle.Success);
+
+            const row = new ActionRowBuilder().addComponents(upvoteButton, downvoteButton, whoVotedButton);
+
+            const suggestionMessage = await message.channel.send({ embeds: [embed], components: [row] });
 
             suggestionsData.suggestions.push({
                 id: suggestionMessage.id,
@@ -34,8 +57,6 @@ module.exports = {
             });
 
             fs.writeFileSync(suggestionsPath, JSON.stringify(suggestionsData, null, 2));
-
-            message.delete();
         }
     }
 };

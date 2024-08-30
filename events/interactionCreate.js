@@ -3,6 +3,7 @@ const path = require('path');
 const { handleButtonInteraction } = require('./buttonCreate');
 const { handleModalSubmit } = require('./modalCreate');
 const { handleMenuButtonInteraction } = require('./menuCreate');
+const { handleSuggestionButtonInteraction } = require('./suggestionHandle');
 
 const dataPath = path.join(__dirname, '../database/data.json');
 let channelData = require(dataPath);
@@ -23,7 +24,11 @@ module.exports = {
         } else if (interaction.isButton()) {
             if (interaction.customId.startsWith('menu_')) {
                 await handleMenuButtonInteraction(interaction);
-            } else {
+            } 
+            else if (interaction.customId === 'upvote' || interaction.customId === 'downvote' || interaction.customId === 'whoVoted') {
+                handleSuggestionButtonInteraction(interaction);
+            }
+            else {
                 await handleButtonInteraction(interaction, channelData);
             }
         } else if (interaction.isModalSubmit()) {
